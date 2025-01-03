@@ -1,8 +1,8 @@
-import { Link, useLocation } from 'react-router'
+import Link from 'next/link'
 
 export default function Landing(){
     return(
-        <div className="min-h-screen flex place-items-center justify-center bg-">
+        <div className="min-h-screen flex place-items-center justify-center bg-beige">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/82/Gradient_example.png')] bg-cover opacity-10"></div>
             
@@ -18,7 +18,7 @@ export default function Landing(){
 
                 {/* Buttons */}
                 <div className="mt-3">
-                    <Link to="/home">
+                    <Link href="/home">
                         <button>Enter</button>
                     </Link>
                     
