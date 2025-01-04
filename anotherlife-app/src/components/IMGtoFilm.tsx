@@ -1,19 +1,36 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import {Rnd} from "react-rnd"
+import api from "../fetchApiService";
 import Draggable from "react-draggable";
 
 export default function UploadWindow() {
   const dragRef = React.useRef(null);
-  const [activeTab, setActiveTab] = useState("music"); // Default active tab
+  const [activeTab, setActiveTab] = useState("convert"); // Default active tab
 
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId); // Update the active tab
   };
 
   return (
-    <Draggable bounds="parent" nodeRef={dragRef} offsetParent={document.body} handle=".title-bar" className="cursor-move">
-      <div className="window active" ref={dragRef} style={{ maxWidth: 400 }}>
+    // <Draggable bounds="parent" nodeRef={dragRef} offsetParent={document.body} handle=".title-bar" className="cursor-move">
+    <Rnd
+      default={{
+        x: 400,
+        y: 400,
+        width: 400,
+        height: 400,
+      }}
+      minWidth={400}
+      minHeight={400}
+      maxWidth={800}
+      maxHeight={800}
+      lockAspectRatio
+      bounds="parent" // Limits dragging within the parent container
+      dragHandleClassName="title-bar"
+    >
+      <div className="window">
         <div className="title-bar" >
           <div className="title-bar-text" aria-disabled>IMGtoFilm</div>
           <div className="title-bar-controls">
@@ -46,40 +63,32 @@ export default function UploadWindow() {
             </button>
             <button
               role="tab"
-              aria-controls="food"
-              aria-selected={activeTab === "food"}
-              className={`tab-button ${activeTab === "food" ? "active" : ""}`}
-              onClick={() => handleTabClick("food")}
+              aria-controls="settings"
+              aria-selected={activeTab === "settings"}
+              className={`tab-button ${activeTab === "settings" ? "active" : ""}`}
+              onClick={() => handleTabClick("settings")}
             >
-              Food
+              Settings
             </button>
           </menu>
 
           {/* Tab Panels */}
           <article role="tabpanel" id="convert" hidden={activeTab !== "convert"}>
-            <p>Set your listening preferences</p>
-            <fieldset>
-              <legend>Today's mood</legend>
-              <div className="field-row">
-                <input id="radio30" type="radio" name="fieldset-example2" />
-                <label htmlFor="radio30">Nicki Minaj</label>
+            <p className="mb-1">Upload a picture</p>
+            <fieldset className="">
+              <div className="">
+                <label className="mr-2">Quality</label>
+                <select>
+                  <option>100%</option>
+                  <option>50%</option>
+                  <option>0%</option>
+                </select>
               </div>
-              <div className="field-row">
-                <input id="radio31" type="radio" name="fieldset-example2" />
-                <label htmlFor="radio31">Bell Towers</label>
-              </div>
-              <div className="field-row">
-                <input id="radio32" type="radio" name="fieldset-example2" />
-                <label htmlFor="radio32">The Glamorous Monique</label>
-              </div>
-              <div className="field-row">
-                <input id="radio33" type="radio" name="fieldset-example2" />
-                <label htmlFor="radio33">EN. V</label>
-              </div>
+              
+            
             </fieldset>
-            <section className="field-row">
-              <button>Reset Alarm...</button>
-              <label>Try this to get some attention</label>
+            <section className="field-row flex justify-end">
+              <button className="mr-2">Upload</button>
             </section>
           </article>
 
@@ -93,28 +102,21 @@ export default function UploadWindow() {
             />
           </article>
 
-          <article role="tabpanel" id="food" hidden={activeTab !== "food"}>
+          <article role="tabpanel" id="settings" hidden={activeTab !== "settings"}>
             <p>
-              You create the content for each tab by using an{" "}
-              <code>article</code> tag.
+              Edit Settings
             </p>
-            <iframe
-              width="100%"
-              height={200}
-              src="https://www.youtube.com/embed/TODJBQ0tnow"
-              frameBorder={0}
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            
           </article>
 
           {/* Footer Buttons */}
-          <section className="field-row flex justify-end">
+          {/* <section className="field-row flex justify-end">
             <button className="default">OK</button>
             <button>Cancel</button>
-          </section>
+          </section> */}
         </div>
       </div>
-    </Draggable>
+    {/* </Draggable> */}
+    </Rnd>
   );
 }
