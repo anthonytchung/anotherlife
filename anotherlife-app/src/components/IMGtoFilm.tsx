@@ -2,15 +2,31 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import {Rnd} from "react-rnd"
+// import uploadTab from "./uploadTab"
 import api from "../fetchApiService";
 import Draggable from "react-draggable";
 
 export default function UploadWindow() {
   const dragRef = React.useRef(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [activeTab, setActiveTab] = useState("convert"); // Default active tab
+  const [selectedImage, setSelectedImage] = useState();
+
+  // This function will be triggered when the file field change
+  const imageChange = (e: any) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
 
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId); // Update the active tab
+  };
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // Programmatically trigger the file input click
+    }
   };
 
   return (
@@ -76,13 +92,43 @@ export default function UploadWindow() {
           <article role="tabpanel" id="convert" hidden={activeTab !== "convert"}>
             <p className="mb-1">Upload a picture</p>
             <fieldset className="">
-              <div className="">
-                <label className="mr-2">Quality</label>
-                <select>
-                  <option>100%</option>
-                  <option>50%</option>
-                  <option>0%</option>
-                </select>
+              <div className="flex flex-col align-baseline">
+                <div className="flex flex-row justify-between">
+                  <button
+                    className=""
+                    onClick={handleButtonClick}
+                    >
+                      Choose File
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    className="hidden"
+                    onChange={imageChange}
+                  />
+                  <div>
+                    <label className="mr-2">Quality</label>
+                    <select>
+                      <option>100%</option>
+                      <option>75%</option>
+                      <option>50%</option>
+                    </select>
+                  </div>
+                </div>
+                
+                {selectedImage && (
+                  <div>
+                  {/* <Image
+                    src={URL.createObjectURL(selectedImage)}
+                    className="w-full"
+                    width={100}
+                    height={100}
+
+                    alt="Image Preview"
+                  /> */}
+                  <p>{URL.createObjectURL(selectedImage)}</p>
+                </div>
+                )}
               </div>
               
             
