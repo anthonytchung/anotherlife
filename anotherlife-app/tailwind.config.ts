@@ -12,7 +12,7 @@ export default {
         beige: "#fffae7"
       },
       backgroundImage:{
-        win7: "./public/windows-7-background.jpg"
+        win7: "url('/windows-7-background.jpg')"
       }
     },
   },
