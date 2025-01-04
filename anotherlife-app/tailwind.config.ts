@@ -11,6 +11,9 @@ export default {
       colors: {
         beige: "#fffae7"
       },
+      backgroundImage:{
+        win7: "./public/windows-7-background.jpg"
+      }
     },
   },
   plugins: [],
