@@ -18,7 +18,7 @@ export default function Landing(){
 
                 {/* Buttons */}
                 <div className="mt-3">
-                    <Link href="/home">
+                    <Link href="/auth">
                         <button>Enter</button>
                     </Link>
                     

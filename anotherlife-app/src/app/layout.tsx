@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 import "7.css/dist/7.css";
 
@@ -24,12 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </AuthProvider>
   );
 }

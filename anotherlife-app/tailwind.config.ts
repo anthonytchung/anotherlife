@@ -12,7 +12,8 @@ export default {
         beige: "#fffae7"
       },
       backgroundImage:{
-        win7: "url('/windows-7-background.jpg')"
+        win7_bg: "url('/windows-7-background.jpg')",
+        login_bg: "url('/login-background.jpg')"
       }
     },
   },
