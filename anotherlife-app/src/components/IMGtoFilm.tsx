@@ -117,17 +117,10 @@ export default function UploadWindow() {
                 </div>
                 
                 {selectedImage && (
-                  <div>
-                  {/* <Image
-                    src={URL.createObjectURL(selectedImage)}
-                    className="w-full"
-                    width={100}
-                    height={100}
-
-                    alt="Image Preview"
-                  /> */}
-                  <p>{URL.createObjectURL(selectedImage)}</p>
-                </div>
+                  <div className="mt-4">
+                    <p>Filename: {selectedImage.name}</p>
+                    <p>File Size: {(selectedImage.size / 1024).toFixed(2)} KB</p>
+                  </div>
                 )}
               </div>
               

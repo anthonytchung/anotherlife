@@ -10,7 +10,7 @@ export default function Landing(){
             <div className="z-10 text-center">
                 {/* Title */}
                 <h1 className="text-lg font-bold text-gray-800 drop-shadow-lg">
-                    In Another Life
+                    Enter
                 </h1>
                 {/* <p className="text-lg md:text-xl text-gray-700 mt-4">
                 Relive the charm of the 2000s. Upload your photos and transform them into timeless memories.
