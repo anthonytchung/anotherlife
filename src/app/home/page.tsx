@@ -17,13 +17,13 @@ export default function Home() {
   }, [user, loading, router]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <span className="loader animate m-auto h-auto justify-center" aria-label="Processing your request"></span>
   }
 
   return (
     <div
       id="homepage"
-      className="min-h-screen flex flex-col items-center justify-center bg-win7_bg bg-cover bg-center relative"
+      className="min-h-screen flex flex-col items-center justify-center bg-win7_bg bg-cover bg-center"
     >
       <IMGtoFilm />
     </div>

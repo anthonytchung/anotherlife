@@ -6,10 +6,9 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Main content fills available space */}
-      <main className="flex-grow">{children}</main>
-      {/* Taskbar at the bottom */}
+    <div className="relative min-h-screen">
+      {/* Add bottom padding to ensure content doesn't overlap with the taskbar */}
+      <main className="">{children}</main>
       <Taskbar />
     </div>
   );

@@ -18,13 +18,12 @@
       }
       
       .start-button {
-        background: #0078d7; /* Windows 7 Start button blue */
-        padding: 4px 8px;
-        border: 1px solid #005a9e;
-        border-radius: 2px;
-        color: #fff;
-        font-weight: bold;
+        all: unset;
         cursor: pointer;
+        padding: 0.5rem 1rem;
+        background: none;
+        color: inherit;
+        font: inherit;
       }
       
       .start-button a {
@@ -48,5 +47,14 @@
       .taskbar-item:hover {
         text-decoration: underline;
       }
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      body {
+        overflow: hidden; /* Remove any scrollbars on the body */
+      }
+      
       
 }
