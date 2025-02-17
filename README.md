@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AnotherLife
+
+AnotherLife is a Next.js web application that combines a retro Windows 7 desktop aesthetic with modern web technologies. The app lets users sign in with Firebase Authentication (including anonymous sign-in), upload images, and view them in a draggable window interface. It also integrates with an image manipulation API (using either Python/Pillow or JavaScript/Sharp) to apply digital film effects to uploaded images.
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Firebase Setup](#firebase-setup)
+  - [(Optional) Python API Setup](#optional-python-api-setup)
+- [Usage](#usage)
+- [Directory Structure](#directory-structure)
+- [Future Improvements](#future-improvements)
+- [License](#license)
+
+## Features
+
+- **User Authentication:**  
+  Sign in, register, anonymous sign-in, and password reset using Firebase Authentication.
+- **Protected Routes:**  
+  The `/home` route is protected so only authenticated users can access it.
+- **Image Upload & Display:**  
+  Users can upload images, which are stored in Firebase Storage and indexed in Firestore.  
+  The images can be viewed in a dedicated "My Pictures" tab with client-side caching.
+- **Windows 7 UI:**  
+  The app uses TailwindCSS and [7.css](https://github.com/hatsoft/7.css) for a nostalgic Windows 7 look, including a taskbar and draggable windows.
+- **Image Manipulation API:**  
+  Integrate with a Python (Pillow) or Node.js (Sharp) service to apply digital film effects to images (future enhancement).
+
+## Tech Stack
+
+- **Next.js** – React framework for server‑side rendering and routing.
+- **Firebase** – Authentication, Firestore, and Storage for backend services.
+- **TailwindCSS** – Utility-first CSS framework.
+- **7.css** – CSS library to emulate the Windows 7 UI.
+- **(Optional) Python/Flask with Pillow** – For image manipulation (or consider using Sharp in Node.js).
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Node.js** (v16 or later recommended)
+- **npm** or **yarn**
+- A **Firebase Project** with Authentication, Firestore, and Storage enabled.
+- (Optional) Python 3 and `pip` if using the Python image manipulation service.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   git clone https://github.com/yourusername/anotherlife.git
+   cd anotherlife
