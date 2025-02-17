@@ -6,9 +6,11 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      {children} 
+    <div className="min-h-screen flex flex-col">
+      {/* Main content fills available space */}
+      <main className="flex-grow">{children}</main>
+      {/* Taskbar at the bottom */}
       <Taskbar />
-    </section>
+    </div>
   );
 }

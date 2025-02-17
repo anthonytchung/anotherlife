@@ -8,46 +8,52 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 export default function PictureTab() {
   const { user } = useAuth();
   const [pictures, setPictures] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetches the pictures for the given user UID from Firestore
-  async function fetchUserPictures(uid: string): Promise<string[]> {
-    const picsQuery = query(
-      collection(db, "pictures"),
-      where("uid", "==", uid)
-    );
-    const querySnapshot = await getDocs(picsQuery);
-    const pics = querySnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return data.url;
-    });
-    return pics;
-  }
+  const cacheKey = user && !user.isAnonymous ? `pictures_${user.uid}` : null;
 
-  useEffect(() => {
-    async function loadPictures() {
+  const fetchPictures = async (forceRefresh = false) => {
+    // If we have a valid cache key and not forcing a refresh, try to load from sessionStorage
+    if (cacheKey && !forceRefresh) {
+      const cachedPics = sessionStorage.getItem(cacheKey);
+      if (cachedPics) {
+        setPictures(JSON.parse(cachedPics));
+        return;
+      }
+    }
+
+    if (user && !user.isAnonymous) {
       setLoading(true);
       setError("");
-      if (user) {
-        if (user.isAnonymous) {
-          // If the user is anonymous, they don't have any pictures.
-          setPictures([]);
-        } else {
-          try {
-            const pics = await fetchUserPictures(user.uid);
-            setPictures(pics);
-          } catch (err: any) {
-            setError("Failed to load pictures. Please try again.");
-            console.error(err);
-          }
+      try {
+        const picsQuery = query(
+          collection(db, "pictures"),
+          where("uid", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(picsQuery);
+        const pics = querySnapshot.docs.map((doc) => doc.data().url);
+        setPictures(pics);
+        // Cache the pictures in sessionStorage
+        if (cacheKey) {
+          sessionStorage.setItem(cacheKey, JSON.stringify(pics));
         }
-      } else {
-        setPictures([]);
+      } catch (err: any) {
+        setError("Failed to load pictures. Please try again.");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
+    } else {
+      setPictures([]);
     }
-    loadPictures();
+  };
+
+  // Load pictures once when the component mounts
+  useEffect(() => {
+    fetchPictures();
+    // We run this effect when the user changes.
+    // Note: We do not include forceRefresh in the dependency array.
   }, [user]);
 
   return (
@@ -56,9 +62,10 @@ export default function PictureTab() {
       id="pics"
       className="max-h-[calc(50vh-100px)] overflow-y-auto p-4"
     >
-      {loading && (
-        <div role="progressbar" className="marquee"></div>
-      )}
+      <button onClick={() => fetchPictures(true)} className="mb-2">
+        Refresh Pictures
+      </button>
+      {loading && <div role="progressbar" className="marquee"></div>}
       {error && <p className="text-red-600">{error}</p>}
       {!loading && pictures.length === 0 && (
         <p>No pictures uploaded yet.</p>
