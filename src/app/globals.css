@@ -3,4 +3,50 @@
 @tailwind utilities;
 
 @layer base {
+    .taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: #3a3a3a; /* Dark gray similar to Windows 7 */
+        border-top: 2px solid #2d2d2d;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        z-index: 1000;
+      }
+      
+      .start-button {
+        background: #0078d7; /* Windows 7 Start button blue */
+        padding: 4px 8px;
+        border: 1px solid #005a9e;
+        border-radius: 2px;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .start-button a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      .taskbar-items {
+        display: flex;
+        align-items: center;
+        margin-left: 16px;
+      }
+      
+      .taskbar-item {
+        margin-right: 16px;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .taskbar-item:hover {
+        text-decoration: underline;
+      }
+      
 }

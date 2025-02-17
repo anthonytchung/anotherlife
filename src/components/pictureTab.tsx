@@ -51,23 +51,32 @@ export default function PictureTab() {
   }, [user]);
 
   return (
-    <article role="tabpanel" id="pics">
-      {loading && <p>Loading pictures...</p>}
+    <article
+      role="tabpanel"
+      id="pics"
+      className="max-h-[calc(50vh-100px)] overflow-y-auto p-4"
+    >
+      {loading && (
+        <div role="progressbar" className="marquee"></div>
+      )}
       {error && <p className="text-red-600">{error}</p>}
       {!loading && pictures.length === 0 && (
         <p>No pictures uploaded yet.</p>
       )}
-      {!loading &&
-        pictures.map((src, index) => (
-          <Image
-            key={index}
-            className="w-full"
-            src={src}
-            width={500}
-            height={500}
-            alt={`Uploaded picture ${index + 1}`}
-          />
-        ))}
+      {!loading && pictures.length > 0 && (
+        <div className="flex flex-col gap-4">
+          {pictures.map((src, index) => (
+            <Image
+              key={index}
+              className="w-full"
+              src={src}
+              width={500}
+              height={500}
+              alt={`Uploaded picture ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </article>
   );
 }

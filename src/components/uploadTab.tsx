@@ -100,9 +100,7 @@ export default function UploadTab() {
           {selectedImage && (
             <div className="mt-4">
               <p>Filename: {selectedImage.name}</p>
-              <p>
-                File Size: {(selectedImage.size / 1024).toFixed(2)} KB
-              </p>
+              <p>File Size: {(selectedImage.size / 1024).toFixed(2)} KB</p>
             </div>
           )}
         </div>
@@ -113,8 +111,14 @@ export default function UploadTab() {
         </button>
       </section>
       {uploadProgress > 0 && uploadProgress < 100 && (
-        <p>Upload Progress: {uploadProgress.toFixed(2)}%</p>
+        <div role="progressbar" className="progress">
+          <div
+            className="progress-bar"
+            style={{ width: `${uploadProgress.toFixed(2)}%` }}
+          ></div>
+        </div>
       )}
+
       {error && <p className="text-red-600">{error}</p>}
     </article>
   );
