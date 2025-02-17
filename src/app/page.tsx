@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Landing from "../pages/landing"
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
-    <Landing />
+    <LoginPage />
   );
 }

@@ -47,12 +47,12 @@ export default function Taskbar() {
   }, [isStartOpen]);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-gray-800 text-white flex items-center h-14">
+    <div className="absolute bottom-0 left-0 right-0 bg-gray-800 text-white flex items-center h-14  rounded-none glass">
       {/* Start Icon and Menu */}
       <div className="relative">
         <button
           onClick={toggleStartMenu}
-          className="start-button mr-2 -ml-1 m-auto"
+          className="start-button "
         >
           <Image
             src="/icons/win7start.png"
@@ -69,14 +69,14 @@ export default function Taskbar() {
             {/* User Profile Section */}
             {user && (
               <div className="mb-4 border-b border-gray-400 pb-2">
-                <div className="flex items-center">
+                <div className="flex items-center justify-end mr-3">
                   {user.isAnonymous ? (
                     <Image
                       src="/win7accountpfp/guest.bmp"
                       alt="Profile"
                       width={40}
                       height={40}
-                      className="rounded-full"
+                      className="rounded-sm border-2 border-black"
                     />
                   ) : (
                       <Image
@@ -84,12 +84,12 @@ export default function Taskbar() {
                         alt="User Profile"
                         width={40} // Adjust size as needed
                         height={40} // Adjust size as needed
-                        className="rounded-sm border-2 border-blue-400"
+                        className="rounded-sm border-2 border-black"
                       />
                   )}
-                  <div className="ml-2">
-                    <p className="text-sm font-bold text-black">
-                      {user.isAnonymous ? ("Anonymous") : (user.displayName || user.email)}
+                  <div className="flex ml-2">
+                    <p className="text-sm font-bold text-black justify-end">
+                      {user.isAnonymous ? ("Guest") : (user.displayName || user.email)}
                     </p>
                   </div>
                 </div>

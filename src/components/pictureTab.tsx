@@ -63,7 +63,7 @@ export default function PictureTab() {
       id="pics"
       className="max-h-[calc(50vh-100px)] overflow-y-auto p-4"
     >
-      <button onClick={() => fetchPictures(true)} className="mb-2">
+      <button onClick={() => fetchPictures(true)} className="mb-2 justify-self-end">
         Refresh Pictures
       </button>
       {loading && <div role="progressbar" className="marquee"></div>}
@@ -72,7 +72,7 @@ export default function PictureTab() {
         <p>No pictures uploaded yet.</p>
       )}
       {!loading && pictures.length > 0 && (
-        <div className="flex flex-col gap-4">
+        <fieldset className="flex flex-col gap-4">
           {pictures.map((src, index) => (
             <Image
               key={index}
@@ -83,7 +83,7 @@ export default function PictureTab() {
               alt={`Uploaded picture ${index + 1}`}
             />
           ))}
-        </div>
+        </fieldset>
       )}
     </article>
   );
