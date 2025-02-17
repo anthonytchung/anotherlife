@@ -12,12 +12,13 @@ export default function Home() {
   useEffect(() => {
     // Only redirect if loading is finished and there's no authenticated user
     if (!loading && !user) {
-      router.push("/auth");
+      router.push("/login");
     }
   }, [user, loading, router]);
 
   if (loading) {
-    return <span className="loader animate m-auto h-auto justify-center" aria-label="Processing your request"></span>
+    return (<div><span className="loader animate m-auto h-auto justify-center" aria-label="Processing your request"></span><span className="align-middle">Loading</span>
+        </div>)
   }
 
   return (

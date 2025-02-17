@@ -20,8 +20,6 @@ AnotherLife is a Next.js web application that combines a retro Windows 7 desktop
 
 - **User Authentication:**  
   Sign in, register, anonymous sign-in, and password reset using Firebase Authentication.
-- **Protected Routes:**  
-  The `/home` route is protected so only authenticated users can access it.
 - **Image Upload & Display:**  
   Users can upload images, which are stored in Firebase Storage and indexed in Firestore.  
   The images can be viewed in a dedicated "My Pictures" tab with client-side caching.

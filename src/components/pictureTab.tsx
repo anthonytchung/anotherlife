@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 
 export default function PictureTab() {
   const { user } = useAuth();
@@ -29,7 +29,8 @@ export default function PictureTab() {
       try {
         const picsQuery = query(
           collection(db, "pictures"),
-          where("uid", "==", user.uid)
+          where("uid", "==", user.uid),
+          orderBy("createdAt", "desc")
         );
         const querySnapshot = await getDocs(picsQuery);
         const pics = querySnapshot.docs.map((doc) => doc.data().url);

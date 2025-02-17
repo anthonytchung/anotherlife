@@ -22,11 +22,8 @@ function getFriendlyErrorMessage(message: string): string {
   if (message.includes("email-already-in-use")) {
     return "An account with this email already exists.";
   }
-  if (message.includes("EMAIL_NOT_FOUND")) {
-    return "No account found with this email.";
-  }
-  if (message.includes("INVALID_PASSWORD")) {
-    return "Incorrect password. Please try again.";
+  if (message.includes("too-many-requests")) {
+    return "Too many tries. Try again later.";
   }
   return "An unexpected error occurred. Please try again.";
 }
@@ -123,7 +120,16 @@ export default function Auth() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">{isRegister ? "Sign Up" : "Login"}</button>
+        <button className="blank-button" type="submit">
+          {/* {isRegister ? "Sign Up" : "Login"} */}
+          <Image
+            src="/icons/wm-back.svg"
+            width={20}
+            height={20}
+            alt="login"
+            className="scale-x-[-1]"
+          />
+        </button>
       </form>
       <button onClick={() => setIsRegister(!isRegister)}>
         {isRegister ? "Already have an account? Login" : "Create an account"}

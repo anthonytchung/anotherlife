@@ -25,6 +25,15 @@
         color: inherit;
         font: inherit;
       }
+
+      .blank-button {
+        all: unset;
+        cursor: pointer;
+        background: none;
+        color: inherit;
+        font: inherit;
+        width:fit-content;
+      }
       
       .start-button a {
         text-decoration: none;

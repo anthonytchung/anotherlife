@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Taskbar() {
   const router = useRouter();
+  const { user } = useAuth();
   const [isStartOpen, setIsStartOpen] = useState(false);
   const startMenuRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +29,10 @@ export default function Taskbar() {
   // Close start menu when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (startMenuRef.current && !startMenuRef.current.contains(e.target as Node)) {
+      if (
+        startMenuRef.current &&
+        !startMenuRef.current.contains(e.target as Node)
+      ) {
         setIsStartOpen(false);
       }
     }
@@ -45,7 +50,10 @@ export default function Taskbar() {
     <div className="absolute bottom-0 left-0 right-0 bg-gray-800 text-white flex items-center h-14">
       {/* Start Icon and Menu */}
       <div className="relative">
-        <button onClick={toggleStartMenu} className="start-button mr-2 -ml-1 m-auto">
+        <button
+          onClick={toggleStartMenu}
+          className="start-button mr-2 -ml-1 m-auto"
+        >
           <Image
             src="/icons/win7start.png"
             alt="Start"
@@ -58,24 +66,53 @@ export default function Taskbar() {
             ref={startMenuRef}
             className="absolute bottom-12 left-0 bg-gray-200 border border-gray-400 p-4 rounded shadow-lg w-64"
           >
+            {/* User Profile Section */}
+            {user && (
+              <div className="mb-4 border-b border-gray-400 pb-2">
+                <div className="flex items-center">
+                  {user.isAnonymous ? (
+                    <Image
+                      src="/win7accountpfp/guest.bmp"
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  ) : (
+                      <Image
+                        src="/win7accountpfp/user.bmp"
+                        alt="User Profile"
+                        width={40} // Adjust size as needed
+                        height={40} // Adjust size as needed
+                        className="rounded-sm border-2 border-blue-400"
+                      />
+                  )}
+                  <div className="ml-2">
+                    <p className="text-sm font-bold text-black">
+                      {user.isAnonymous ? ("Anonymous") : (user.displayName || user.email)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
             <ul>
               <li className="py-1">
-                <Link href="/programs">Programs</Link>
+                <Link href="/home">Programs</Link>
               </li>
               <li className="py-1">
-                <Link href="/documents">Documents</Link>
+                <Link href="/home">Documents</Link>
               </li>
               <li className="py-1">
-                <Link href="/settings">Control Panel</Link>
+                <Link href="/home">Control Panel</Link>
               </li>
               <li className="py-1">
-                <Link href="/search">Search</Link>
+                <Link href="/home">Search</Link>
               </li>
               <li className="py-1">
                 <Link href="/home">Home</Link>
               </li>
-              <li className="py-1">
-                <button onClick={handleLogout} className="w-full text-left">
+              <li className="py-1 justify-self-end ">
+                <button onClick={handleLogout} className=" text-left">
                   Logout
                 </button>
               </li>
@@ -84,7 +121,7 @@ export default function Taskbar() {
         )}
       </div>
 
-      {/* You can remove additional taskbar items if all navigation is now handled in the Start Menu */}
+      {/* Remove additional taskbar items since navigation is now handled in the Start Menu */}
     </div>
   );
 }
