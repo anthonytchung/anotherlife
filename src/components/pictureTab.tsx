@@ -68,8 +68,8 @@ export default function PictureTab() {
       </button>
       {loading && <div role="progressbar" className="marquee"></div>}
       {error && <p className="text-red-600">{error}</p>}
-      {!loading && pictures.length === 0 && (
-        <p>No pictures uploaded yet.</p>
+      {!loading && pictures.length === 0 && (user?.isAnonymous ? 
+        (<p>Guest user.</p>) : (<p>No pictures uploaded yet.</p>)
       )}
       {!loading && pictures.length > 0 && (
         <fieldset className="flex flex-col gap-4">

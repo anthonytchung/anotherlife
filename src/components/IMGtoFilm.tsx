@@ -5,7 +5,6 @@ import {Rnd} from "react-rnd"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import PictureTab from "./pictureTab"
 import UploadTab from "./uploadTab"
-import api from "../fetchApiService";
 import Draggable from "react-draggable";
 
 export default function IMGtoFilm() {
